@@ -13,6 +13,7 @@ const float = keyframes`
 const PageWrapper = styled.div`
   position: relative;
   width: 100%;
+  overflow-x: hidden; /* Prevents any horizontal scrolling */
   color: white;
 `;
 
@@ -20,7 +21,7 @@ const VideoBackground = styled.video`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%; /* Changed from 100vw */
   height: 100vh;
   object-fit: cover;
   z-index: -2;
@@ -30,9 +31,9 @@ const DarkOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%; /* Changed from 100vw */
   height: 100vh;
-  background: rgba(4, 30, 66, 0.7); /* Penn State Navy with 70% opacity */
+  background: rgba(4, 30, 66, 0.75); 
   z-index: -1;
 `;
 
@@ -56,6 +57,10 @@ const Title = styled.h1`
   background: linear-gradient(to right, #ffffff, #a0bde6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem; /* Small enough for "Accountable" to fit without stretching */
+  }
 `;
 
 const Subtitle = styled.p`
@@ -64,12 +69,23 @@ const Subtitle = styled.p`
   line-height: 1.6;
   max-width: 800px;
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 1.05rem;
+  }
 `;
 
 const ActionButtons = styled.div`
   display: flex;
   gap: 20px;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const PrimaryBtn = styled.button`
@@ -88,6 +104,10 @@ const PrimaryBtn = styled.button`
     transform: translateY(-2px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SecondaryBtn = styled.button`
@@ -103,6 +123,10 @@ const SecondaryBtn = styled.button`
 
   &:hover {
     background-color: rgba(255,255,255,0.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -121,22 +145,25 @@ const SectionTitle = styled.h2`
   font-size: 3rem;
   margin-bottom: 50px;
   color: #ffffff;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
+// Switched to CSS Grid for flawless responsiveness
 const StepsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
 `;
 
 const StepCard = styled.div`
-  flex: 1;
-  min-width: 300px;
-  max-width: 350px;
+  width: 100%;
+  height: 100%;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -146,7 +173,7 @@ const StepCard = styled.div`
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 20px;
     color: #fff;
     display: flex;
@@ -176,7 +203,6 @@ function FadeInSection(props) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Triggers when 20% of the element is visible
           if (entry.isIntersecting) setVisible(true);
         });
       },
@@ -197,9 +223,7 @@ function FadeInSection(props) {
         transition: 'opacity 1s ease-out, transform 1s ease-out',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center'
+        display: 'flex'
       }}
     >
       {props.children}
@@ -214,7 +238,6 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      {/* Background stays fixed while content scrolls over it */}
       <VideoBackground autoPlay loop muted playsInline>
         <source src="/test-video.mp4" type="video/mp4" />
       </VideoBackground>

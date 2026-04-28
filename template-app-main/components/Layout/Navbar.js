@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import Image from 'next/image'; // <-- NEW: Next.js optimized image component
 import { useStateContext } from '../../context/StateContext';
 
 const Nav = styled.nav`
@@ -13,7 +14,6 @@ const Nav = styled.nav`
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   flex-wrap: wrap;
 
-  /* Mobile responsiveness */
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 15px 20px;
@@ -21,11 +21,16 @@ const Nav = styled.nav`
   }
 `;
 
-const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
+// UPDATED: Changed from text to an image container
+const LogoContainer = styled.div`
   cursor: pointer;
-  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const NavLinks = styled.div`
@@ -73,8 +78,18 @@ export default function Navbar() {
   return (
     <Nav>
       <Link href="/" passHref>
-        <Logo>We Are Booked</Logo>
+        <LogoContainer>
+          {/* NEW: The actual image placement */}
+          <Image 
+            src="/logo.png" 
+            alt="We Are Booked Logo" 
+            width={160} 
+            height={45} 
+            style={{ objectFit: 'contain' }}
+          />
+        </LogoContainer>
       </Link>
+      
       <NavLinks>
         <Link href="/dashboard">Book a Room</Link>
         <Link href="/reservations">My Reservations</Link>

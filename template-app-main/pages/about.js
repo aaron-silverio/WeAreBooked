@@ -62,7 +62,7 @@ export default function About() {
     <PageWrapper>
       <ContentCard>
         <Title>About We Are Booked</Title>
-        // Description / Context of my project
+        {/*Description / Context of my project*/}
         <Paragraph>
           <strong>We Are Booked</strong> is a proof-of-concept decentralized application (dApp) I designed to solve a common, everyday campus problem: "Ghost Bookings" in university library study spaces. 
         </Paragraph>
@@ -80,7 +80,7 @@ export default function About() {
 
         <SectionTitle>Project Context</SectionTitle>
         <Paragraph>
-          I built this prototype for <strong>CMPSC 263: Blockchain and Web Development</strong>to demonstrates full-stack Web3 integration, utilizing Next.js for the frontend, styled-components for responsive UI design, and Solidity smart contracts deployed on the BNB Smart Chain Testnet (via Remix and OpenZeppelin) to manage the escrow logic.
+          I built this prototype for <strong>CMPSC 263: Blockchain and Web Development</strong> to demonstrates full-stack Web3 integration, utilizing Next.js for the frontend, styled-components for responsive UI design, and Solidity smart contracts deployed on the BNB Smart Chain Testnet (via Remix and OpenZeppelin) to manage the escrow logic.
         </Paragraph>
       </ContentCard>
     </PageWrapper>

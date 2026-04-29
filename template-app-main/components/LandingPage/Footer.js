@@ -1,53 +1,32 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Footer = () => {
-  return (
-    <FooterSection>
-      <FooterContainer>
-        <LeftContainer>
-          © {new Date().getFullYear()} CMPSC 263
-        </LeftContainer>
-        <CenterContainer>
-          <Link href="#">Privacy Policy</Link> | <Link href="#">Terms of Service</Link>
-        </CenterContainer>
-        <RightContainer>
-          <SocialIcon href="#" aria-label="Facebook">FB</SocialIcon>
-          <SocialIcon href="#" aria-label="Twitter">TW</SocialIcon>
-          <SocialIcon href="#" aria-label="Instagram">IG</SocialIcon>
-        </RightContainer>
-      </FooterContainer>
-    </FooterSection>
-  );
-};
+const FooterContainer = styled.footer`
+  background-color: #041E42;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto; /* Pushes footer to the bottom of the page */
+  z-index: 10;
+  position: relative;
 
-const FooterSection = styled.footer`
+  p {
+    margin: 5px 0;
+  }
 
-`;
-
-const FooterContainer = styled.div`
-
-`;
-
-const LeftContainer = styled.div``;
-
-const CenterContainer = styled.div``;
-
-const RightContainer = styled.div`
-
-`;
-
-const Link = styled.a`
-
-`;
-
-const SocialIcon = styled.a`
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
-  &:hover {
-    color: #007bff;
+  .highlight {
+    color: #a0bde6;
+    font-weight: bold;
   }
 `;
 
-export default Footer;
+export default function Footer() {
+  return (
+    <FooterContainer>
+      <p>Developed by <span className="highlight">Aaron Silverio</span></p>
+      <p>CMPSC 263 - Blockchain and Web Development</p>
+      <p>&copy; {new Date().getFullYear()} We Are Booked. All rights reserved.</p>
+    </FooterContainer>
+  );
+}

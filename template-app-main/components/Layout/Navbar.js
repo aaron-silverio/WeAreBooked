@@ -91,6 +91,7 @@ export default function Navbar() {
       </Link>
       
       <NavLinks>
+        <Link href="/about">About</Link>
         <Link href="/dashboard">Book a Room</Link>
         <Link href="/reservations">My Reservations</Link>
         {account ? (

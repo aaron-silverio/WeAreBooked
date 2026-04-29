@@ -9,11 +9,54 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
 `;
 
+// NEW: Stat Cards to fill whitespace and add a Web3 feel
+const StatsRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+`;
+
+const StatCard = styled.div`
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid #041E42;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+
+  h4 {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #041E42;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .subtext {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+    font-weight: normal;
+  }
+`;
+
 const DateHeader = styled.div`
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
   h2 {
     color: #041E42;
-    margin-bottom: 10px;
+    margin: 0;
   }
 `;
 
@@ -23,6 +66,7 @@ const GridWrapper = styled.div`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 `;
 
 const LeftColumn = styled.div`
@@ -50,11 +94,12 @@ const HeaderRow = styled.div`
 `;
 
 const HeaderCell = styled.div`
-  min-width: 120px; /* 1-hour block */
+  min-width: 120px; 
   padding: 0 5px;
   font-weight: bold;
   font-size: 0.85rem;
   border-right: 1px solid #ddd;
+  text-align: center;
 `;
 
 const RoomRow = styled.div`
@@ -82,24 +127,20 @@ const RoomInfo = styled.div`
   }
 `;
 
-// Updated styling to match the Penn State screenshot
 const TimeBlock = styled.div`
-  min-width: 60px; /* 30-minute block */
+  min-width: 60px; 
   height: 100%;
   border-right: 1px solid white;
   background-color: ${(props) => {
     if (props.status === 'past') return '#ffffff';
-    if (props.status === 'available') return '#5cb85c'; // Penn State LibCal Green
-    return '#666666'; // Penn State LibCal Dark Grey
+    if (props.status === 'available') return '#5cb85c'; 
+    return '#666666'; 
   }};
   cursor: ${(props) => (props.status === 'available' ? 'pointer' : 'not-allowed')};
+  transition: opacity 0.1s;
 
   &:hover {
-    background-color: ${(props) => {
-      if (props.status === 'available') return '#4cae4c';
-      if (props.status === 'booked') return '#555555';
-      return '#ffffff';
-    }};
+    opacity: ${(props) => (props.status === 'available' ? 0.8 : 1)};
   }
 `;
 
@@ -107,14 +148,14 @@ const CurrentTimeLine = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 240px; /* Positions the line at 5:00 PM */
-  width: 1px;
-  background-color: red;
+  left: 240px; 
+  width: 2px;
+  background-color: #d9534f;
   z-index: 1;
 
   &::before {
     content: '▼';
-    color: red;
+    color: #d9534f;
     position: absolute;
     top: -10px;
     left: -5px;
@@ -125,14 +166,16 @@ const CurrentTimeLine = styled.div`
 const Legend = styled.div`
   display: flex;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 0.9rem;
   align-items: center;
+  justify-content: flex-end;
 
   div {
     display: flex;
     align-items: center;
     gap: 5px;
+    color: #555;
   }
 
   .box {
@@ -143,8 +186,6 @@ const Legend = styled.div`
 `;
 
 const times = ["3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm", "9:00pm", "10:00pm"];
-
-// Expanded room list from your screenshots
 const rooms = [
   "Paterno E128A", "Paterno E128B", "Paterno E128C", "Paterno E128D",
   "Pattee W024 - Collaboration Commons", "Pattee W025 - Collaboration Commons", 
@@ -154,12 +195,9 @@ const rooms = [
   "Pattee W124 - Knowledge Commons"
 ];
 
-// Logic to simulate past (white), booked (grey), and available (green) blocks
 const generateBlocks = (roomIndex) => {
   return Array(16).fill(null).map((_, i) => {
-    if (i < 4) return 'past'; // Everything before 5pm is white
-    
-    // Randomly scatter a few green 'available' blocks, mostly grey
+    if (i < 4) return 'past'; 
     const isAvailable = Math.random() > 0.85; 
     return isAvailable ? 'available' : 'booked';
   });
@@ -176,12 +214,34 @@ export default function Dashboard() {
 
   return (
     <Container>
+      {/* NEW: Stats Row added here */}
+      <StatsRow>
+        <StatCard>
+          <h4>Wallet Status</h4>
+          <p>{account ? 'Connected' : 'Disconnected'}</p>
+          <div className="subtext">{account ? `${account.slice(0, 6)}...${account.slice(-4)}` : 'Please connect to book'}</div>
+        </StatCard>
+        <StatCard>
+          <h4>Active Escrows</h4>
+          <p>{account ? '1' : '0'}</p>
+          <div className="subtext">Rooms currently reserved</div>
+        </StatCard>
+        <StatCard>
+          <h4>Total Locked</h4>
+          <p>{account ? '0.01' : '0.00'} ETH</p>
+          <div className="subtext">Pending check-in refund</div>
+        </StatCard>
+      </StatsRow>
+
       <DateHeader>
         <h2>Current Availability</h2>
+        <Legend>
+          <div><div className="box" style={{ background: '#5cb85c' }}></div> Available</div>
+          <div><div className="box" style={{ background: '#666666' }}></div> Unavailable</div>
+        </Legend>
       </DateHeader>
 
       <GridWrapper>
-        {/* Left Column */}
         <LeftColumn>
           <HeaderRow style={{ padding: '0 10px', fontWeight: 'bold' }}>Space</HeaderRow>
           {rooms.map((room, idx) => (
@@ -191,12 +251,11 @@ export default function Dashboard() {
           ))}
         </LeftColumn>
 
-        {/* Scrollable Grid */}
         <RightScroll>
           <CurrentTimeLine />
           <HeaderRow>
             {times.map((time, idx) => (
-              <HeaderCell key={idx}>{time}</HeaderCell>
+              <HeaderCell key={idx} style={{ flex: 1 }}>{time}</HeaderCell>
             ))}
           </HeaderRow>
           
@@ -213,11 +272,6 @@ export default function Dashboard() {
           ))}
         </RightScroll>
       </GridWrapper>
-
-      <Legend>
-        <div><div className="box" style={{ background: '#5cb85c' }}></div> Available</div>
-        <div><div className="box" style={{ background: '#666666' }}></div> Unavailable</div>
-      </Legend>
     </Container>
   );
 }

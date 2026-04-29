@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
+// NEW: Import the specific icons from FontAwesome
+import { FaLock, FaQrcode, FaEthereum } from 'react-icons/fa'; 
 
 // Animations
 const float = keyframes`
@@ -13,7 +15,7 @@ const float = keyframes`
 const PageWrapper = styled.div`
   position: relative;
   width: 100%;
-  overflow-x: hidden; /* Prevents any horizontal scrolling */
+  overflow-x: hidden;
   color: white;
 `;
 
@@ -21,7 +23,7 @@ const VideoBackground = styled.video`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Changed from 100vw */
+  width: 100%; 
   height: 100vh;
   object-fit: cover;
   z-index: -2;
@@ -31,13 +33,13 @@ const DarkOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Changed from 100vw */
+  width: 100%; 
   height: 100vh;
   background: rgba(4, 30, 66, 0.75); 
   z-index: -1;
 `;
 
-// Section 1: Hero (Takes up full screen)
+// Section 1: Hero
 const HeroSection = styled.div`
   min-height: calc(100vh - 70px);
   display: flex;
@@ -59,7 +61,7 @@ const Title = styled.h1`
   -webkit-text-fill-color: transparent;
 
   @media (max-width: 768px) {
-    font-size: 2.2rem; /* Small enough for "Accountable" to fit without stretching */
+    font-size: 2.2rem; 
   }
 `;
 
@@ -130,7 +132,7 @@ const SecondaryBtn = styled.button`
   }
 `;
 
-// Section 2: How It Works (Below the fold)
+// Section 2: How It Works
 const StepsSection = styled.div`
   min-height: 100vh;
   display: flex;
@@ -152,7 +154,6 @@ const SectionTitle = styled.h2`
   }
 `;
 
-// Switched to CSS Grid for flawless responsiveness
 const StepsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -188,13 +189,17 @@ const StepCard = styled.div`
     font-size: 1.05rem;
   }
 
+  /* UPDATED: We use color instead of text-fill for SVGs */
   .icon {
     font-size: 2.5rem;
+    color: #ffffff; 
     animation: ${float} 6s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
   }
 `;
 
-// Intersection Observer Hook for Scroll Animations
+// Intersection Observer Hook
 function FadeInSection(props) {
   const [isVisible, setVisible] = useState(false);
   const domRef = useRef();
@@ -239,14 +244,14 @@ export default function Home() {
   return (
     <PageWrapper>
       <VideoBackground autoPlay loop muted playsInline>
-        <source src="/test-video.mp4" type="video/mp4" />
+        <source src="/backgroundvid.mp4" type="video/mp4" />
       </VideoBackground>
       <DarkOverlay />
 
       <HeroSection>
-        <Title>Accountable Studying.</Title>
+        <Title>No More Empty Study Spots.</Title>
         <Subtitle>
-          No more empty, reserved rooms. We Are Booked uses Ethereum smart contract escrows to ensure library study spaces go to those who actually use them. Lock your deposit, show up, and get it back.
+          We Are Booked uses Ethereum smart contracts to ensure library spaces go to those who actually show up. Lock in a micro-deposit to secure your room, scan the dynamic QR code when you arrive, and get your crypto back instantly.
         </Subtitle>
         
         <ActionButtons>
@@ -267,22 +272,25 @@ export default function Home() {
         <StepsContainer>
           <FadeInSection>
             <StepCard>
-              <h3><span className="icon">🔒</span> 1. Lock Deposit</h3>
-              <p>Find an open room on the dashboard. Confirm your reservation by locking a micro-deposit (0.01 ETH) into the decentralized escrow contract.</p>
+              {/* NEW: Replaced emoji with FaLock component */}
+              <h3><span className="icon"><FaLock /></span> 1. Lock Deposit</h3>
+              <p>Find an open room on the dashboard. Confirm your reservation by locking a micro-deposit (0.01 ETH) into our decentralized escrow contract.</p>
             </StepCard>
           </FadeInSection>
           
           <FadeInSection>
             <StepCard>
-              <h3><span className="icon">📍</span> 2. Show Up</h3>
-              <p>Go to your reserved room at the library at the correct time. Scan the room's QR code or enter the room PIN into your dashboard to prove you arrived.</p>
+              {/* NEW: Replaced emoji with FaQrcode component */}
+              <h3><span className="icon"><FaQrcode /></span> 2. Scan to Verify</h3>
+              <p>Head to your reserved room. Prove you arrived on time by scanning the room's dynamic, rotating QR code with your phone.</p>
             </StepCard>
           </FadeInSection>
 
           <FadeInSection>
             <StepCard>
-              <h3><span className="icon">💸</span> 3. Get Refunded</h3>
-              <p>The smart contract instantly verifies your presence and refunds your deposit in full. If you no-show, your deposit is forfeit.</p>
+              {/* NEW: Replaced emoji with FaEthereum component */}
+              <h3><span className="icon"><FaEthereum /></span> 3. Instant Refund</h3>
+              <p>The smart contract instantly verifies your presence and refunds your deposit in full. If you no-show, your deposit is forfeited.</p>
             </StepCard>
           </FadeInSection>
         </StepsContainer>

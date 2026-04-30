@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image'; // <-- NEW: Next.js optimized image component
+import Image from 'next/image';
 import { useStateContext } from '../../context/StateContext';
 
 const Nav = styled.nav`
@@ -21,7 +21,6 @@ const Nav = styled.nav`
   }
 `;
 
-// UPDATED: Changed from text to an image container
 const LogoContainer = styled.div`
   cursor: pointer;
   display: flex;
@@ -57,7 +56,8 @@ const NavLinks = styled.div`
   }
 `;
 
-const Button = styled.button`
+// Standard white button for the Disconnected state
+const ConnectButton = styled.button`
   background-color: white;
   color: #041E42;
   border: none;
@@ -72,6 +72,26 @@ const Button = styled.button`
   }
 `;
 
+// NEW: Electric Cyan glowing button for the Connected state
+const ConnectedButton = styled.button`
+  background-color: rgba(0, 229, 255, 0.05);
+  color: #00E5FF;
+  border: 1px solid #00E5FF;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    background-color: rgba(0, 229, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+  }
+`;
+
 export default function Navbar() {
   const { account, connectWallet } = useStateContext();
 
@@ -79,7 +99,6 @@ export default function Navbar() {
     <Nav>
       <Link href="/" passHref>
         <LogoContainer>
-          {/* NEW: The actual image placement */}
           <Image 
             src="/logo.png" 
             alt="We Are Booked Logo" 
@@ -94,12 +113,16 @@ export default function Navbar() {
         <Link href="/about">About</Link>
         <Link href="/dashboard">Book a Room</Link>
         <Link href="/reservations">My Reservations</Link>
+        
+        {/* The single, clean logic block for the wallet button */}
         {account ? (
-          <Button>
+          <ConnectedButton>
             {account.slice(0, 6)}...{account.slice(-4)}
-          </Button>
+          </ConnectedButton>
         ) : (
-          <Button onClick={connectWallet}>Connect Wallet</Button>
+          <ConnectButton onClick={connectWallet}>
+            Connect Wallet
+          </ConnectButton>
         )}
       </NavLinks>
     </Nav>

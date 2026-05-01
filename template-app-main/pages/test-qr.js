@@ -1,6 +1,11 @@
+/* 
+  NOTE: This page  purely simualtes the physical library check-in process (just for proof of concept))
+*/
+
 import styled from 'styled-components';
 import { useStateContext } from '../context/StateContext';
 import { useState } from 'react';
+import TransactionModal from '../components/TransactionModal';
 
 const TestContainer = styled.div`
   max-width: 600px; margin: 100px auto; padding: 40px;
@@ -45,6 +50,7 @@ export default function TestQR() {
       ) : (
         <p style={{color: 'red'}}>Connect your wallet first!</p>
       )}
+      <TransactionModal />
     </TestContainer>
   );
 }

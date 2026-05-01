@@ -26,7 +26,7 @@ export default function Footer() {
     <FooterContainer>
       <p>Developed by <span className="highlight">Aaron Silverio</span></p>
       <p>CMPSC 263 - Blockchain and Web Development</p>
-      <p>&copy; {new Date().getFullYear()} We Are Booked. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} We Are Booked. Class Project.</p>
     </FooterContainer>
   );
 }

@@ -1,9 +1,7 @@
-// PAGE PURPOSE: This page displays the user's current active room reservations. 
-// It pulls the connected wallet address from the StateContext and provides 
-// a direct interface for the user to initiate the check-in and refund process.
+// This page displays the user's current active room reservations
 
 import styled from 'styled-components';
-import { useStateContext } from '../context/StateContext';
+import { useStateContext } from '../context/StateContext'; // pulls connected wallet address
 import Link from 'next/link';
 
 const Container = styled.div`
@@ -18,7 +16,7 @@ const Container = styled.div`
 
 const ReservationCard = styled.div`
   border: 1px solid #e0e0e0;
-  border-left: 8px solid #00E5FF; /* Your Web3 Accent Color */
+  border-left: 8px solid #00E5FF;
   padding: 25px;
   border-radius: 10px;
   display: flex;
@@ -53,7 +51,8 @@ const EmptyState = styled.div`
 `;
 
 export default function Reservations() {
-  const { account } = useStateContext();
+  // NEW: Pulling activeBooking from the context
+  const { account, activeBooking } = useStateContext();
 
   return (
     <Container>
@@ -63,11 +62,18 @@ export default function Reservations() {
         <EmptyState>
           <p>Please connect your wallet to view your reservations.</p>
         </EmptyState>
+      ) : !activeBooking ? (
+        // Shows if they are logged in but haven't clicked a grid square yet
+        <EmptyState>
+          <p>You have no active reservations right now. Head to the dashboard to book a room!</p>
+          <Link href="/dashboard">
+            <ActionButton style={{ marginTop: '15px' }}>Go to Dashboard</ActionButton>
+          </Link>
+        </EmptyState>
       ) : (
-        /* For the presentation, we simulate the active reservation display */
         <ReservationCard>
           <InfoGroup>
-            <h3>Paterno E128A</h3>
+            <h3>{activeBooking}</h3>
             <p>Scheduled: Today, 5:00 PM - 6:00 PM</p>
             <div className="address">Escrow: 0.01 tBNB Locked</div>
           </InfoGroup>

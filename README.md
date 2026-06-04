@@ -9,7 +9,7 @@
 By replacing centralized booking databases with a smart contract escrow system, this application ensures study rooms are utilized efficiently while holding users financially accountable for their reservations.
 
 ## 🚀 Live Demo
-**[Experience the live application here](https://your-vercel-link-here.vercel.app/)**
+**[Experience the live application here](https://we-are-booked.vercel.app/)**
 *(Note: Requires MetaMask and connection to the BSC Testnet. Get testnet BNB [here](https://testnet.binance.org/faucet-smart)).*
 
 ## 🧠 The Problem & Solution
@@ -43,3 +43,20 @@ When a student books a room, they lock a small deposit (`0.01 tBNB`) via a smart
    ```bash
    git clone [https://github.com/aaron-silverio/WeAreBooked.git](https://github.com/aaron-silverio/WeAreBooked.git)
    cd WeAreBooked/template-app-main
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   Navigate to `http://localhost:3000` to interact with the application locally.
+
+## 📝 Smart Contract Verification
+The primary escrow contract is deployed and verified on the BSC Testnet at: `0x273508Adc490Ec2F7dB042c1935E2c9e25dFA8fE`

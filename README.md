@@ -1,6 +1,6 @@
 # 📖 We Are Booked - Decentralized Library Escrow System
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Hosted_on_Vercel-000000?style=for-the-badge&logo=vercel)](https://your-vercel-link-here.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Hosted_on_Vercel-000000?style=for-the-badge&logo=vercel)](https://we-are-booked.vercel.app/)
 [![Solidity](https://img.shields.io/badge/Solidity-e6e6e6?style=for-the-badge&logo=solidity&logoColor=black)]()
 [![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)]()
 

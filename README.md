@@ -13,7 +13,9 @@ By replacing centralized booking databases with a smart contract escrow system, 
 *(Note: Requires MetaMask and connection to the BSC Testnet. Get testnet BNB [here](https://testnet.binance.org/faucet-smart)).*
 
 # Youtube Video
-[Project Overview](https://www.youtube.com/watch?v=wEqJEoqPhss)
+[![Watch the demo](<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/a1a69f36-7c2f-4454-ba5d-934c9221e091" />
+)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
 
 ## The Problem & Solution
 Campus study rooms are often fully booked online but physically empty because students fail to show up. 

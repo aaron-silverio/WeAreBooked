@@ -1,4 +1,4 @@
-# 📖 We Are Booked - Decentralized Library Escrow System
+# We Are Booked - Decentralized Library Escrow System
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Hosted_on_Vercel-000000?style=for-the-badge&logo=vercel)](https://we-are-booked.vercel.app/)
 [![Solidity](https://img.shields.io/badge/Solidity-e6e6e6?style=for-the-badge&logo=solidity&logoColor=black)]()
@@ -8,17 +8,20 @@
 
 By replacing centralized booking databases with a smart contract escrow system, this application ensures study rooms are utilized efficiently while holding users financially accountable for their reservations.
 
-## 🚀 Live Demo
+## Live Demo
 **[Experience the live application here](https://we-are-booked.vercel.app/)**
 *(Note: Requires MetaMask and connection to the BSC Testnet. Get testnet BNB [here](https://testnet.binance.org/faucet-smart)).*
 
-## 🧠 The Problem & Solution
+# Youtube Video
+[Project Overview](https://www.youtube.com/watch?v=wEqJEoqPhss)
+
+## The Problem & Solution
 Campus study rooms are often fully booked online but physically empty because students fail to show up. 
 
 **The Solution:** A micro-deposit escrow system. 
 When a student books a room, they lock a small deposit (`0.01 tBNB`) via a smart contract. If they physically show up and check in using the room's secure QR code within 15 minutes, the deposit is instantly refunded. If they are a no-show, the contract logic automatically forfeits the funds.
 
-## ⚙️ Core Architecture
+## Core Architecture
 
 ### Backend (Smart Contract)
 - **State Management:** Room availability and deadlines are mapped to a custom `Booking` struct deployed on the **Binance Smart Chain (BSC) Testnet**.
@@ -30,14 +33,14 @@ When a student books a room, they lock a small deposit (`0.01 tBNB`) via a smart
 - **Web3 Integration:** Utilizes **Ethers.js v5** as the primary RPC bridge to read active struct states and write transaction payloads directly to the blockchain.
 - **Custom Transaction States:** Avoids native browser alerts in favor of custom, animated transaction modals that reflect the real-time pending/success state of the blockchain.
 
-## 🛠️ Tech Stack
+## Stack
 - **Frontend:** React, Next.js, Styled Components
 - **Web3:** Ethers.js, MetaMask API
 - **Smart Contracts:** Solidity, OpenZeppelin, Hardhat/Remix
 - **Network:** Binance Smart Chain (BSC) Testnet
 - **Deployment:** Vercel
 
-## 💻 Local Setup
+## Local Setup
 
 1. **Clone the repository:**
    ```bash

@@ -8,6 +8,8 @@
 
 By replacing centralized booking databases with a smart contract escrow system, this application ensures study rooms are utilized efficiently while holding users financially accountable for their reservations.
 
+<img width="1915" height="1052" alt="Recording 2026-08-06 at 00 12 43" src="https://github.com/user-attachments/assets/bc712d4e-28cc-47b2-8bf6-d06fb75887b4" />
+
 ## Live Demo
 **[Experience the live application here](https://we-are-booked.vercel.app/)**
 *(Note: Requires MetaMask and connection to the BSC Testnet. Get testnet BNB [here](https://testnet.binance.org/faucet-smart)).*
